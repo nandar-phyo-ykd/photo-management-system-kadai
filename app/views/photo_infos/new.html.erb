@@ -1,0 +1,18 @@
+<p><%= link_to "ログアウト", logout_path, method: :delete %></p>
+
+<h1>写真アップロード</h1>
+
+<%= render partial: 'shared/error_page', locals: { obj: @photo } %>
+
+<div>
+   <%= form_with(model: @photo, url: photo_infos_path, method: :post, local: true) do |f| %>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+      <br>
+      <%= f.label :attachment %>
+      <%= f.file_field :attachment %>
+      <br>   
+      <%= f.submit "アップロード" %>   
+      <%= link_to "キャンセル", photo_infos_path %>
+   <% end %>
+</div>
