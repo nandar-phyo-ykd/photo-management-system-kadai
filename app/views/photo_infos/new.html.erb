@@ -5,14 +5,12 @@
 <%= render partial: 'shared/error_page', locals: { obj: @photo } %>
 
 <div>
-   <%= form_with(model: @photo, url: photo_infos_path, method: :post, local: true) do |f| %>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-      <br>
-      <%= f.label :attachment %>
-      <%= f.file_field :attachment %>
-      <br>   
-      <%= f.submit "アップロード" %>   
-      <%= link_to "キャンセル", photo_infos_path %>
-   <% end %>
+  <%= form_with(model: @photo, url: photo_infos_path, method: :post, local: true) do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %><br/>
+    <%= f.label :attachment %>
+    <%= f.file_field :attachment %><br/>   
+    <%= f.submit "アップロード" %>   
+    <%= link_to "キャンセル", photo_infos_path %>
+  <% end %>
 </div>
