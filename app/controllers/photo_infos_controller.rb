@@ -6,6 +6,8 @@ class PhotoInfosController < ApplicationController
   end 
 
   def create
+    upload_file_name = nil
+    # アップロードファイル
     upload_file = file_upload_params[:attachment]
     if upload_file.present?
       # アップロードファイルの元の名前
@@ -19,14 +21,19 @@ class PhotoInfosController < ApplicationController
     end
     
     @photo = Photo.new(file_upload_params)
-    if @photo.errors.any?
+    # バリデーションチェックに失敗する場合
+    if @photo.invalid?
       render :new
     else
+      # アップロードする画像ファイル名で保存する
+      @photo.attachment = upload_file_name if upload_file_name.present?
+      # ファイルの保存処理が成功する場合
       redirect_to photo_infos_path if @photo.save
     end
   end  
 
   def show
+    @photos_to_tweet = Photo.order(id: :desc)
   end
 
   private   

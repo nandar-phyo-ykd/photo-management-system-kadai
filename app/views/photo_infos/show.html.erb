@@ -2,3 +2,12 @@
 <h1>写真一覧</h1>
 
 <p><%= link_to "写真アプロード画面へ", new_photo_infos_path %></p>
+
+<div>
+  <% @photos_to_tweet.each do |photo| %>
+    <p style="text-align: center;float:left; margin:0 10px;">
+      <span><%= photo.title %></span><br/>
+      <%= image_tag "/user_upload_photos/#{photo.attachment}", {width:'150', height:'200', alt:'img'}%>
+    </p>
+  <% end %>
+</div>
