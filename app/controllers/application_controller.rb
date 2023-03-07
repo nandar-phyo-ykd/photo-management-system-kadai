@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
     def already_login?
       unless current_user.nil?
-        redirect_to photo_info_path
+        redirect_to photo_infos_path
       end
     end
 

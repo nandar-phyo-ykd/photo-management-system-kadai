@@ -1,28 +1,33 @@
 class SessionsController < ApplicationController
   before_action :already_login?, except: :destroy
-  include ApplicationHelper
 
   def new
+    @user = User.new
   end
 
   def create
-    flash.now[alert] ||= []
-    user = User.find_by_user_id(params[:user_id])
-    if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect_to photo_info_path
-    elsif params[:user_id].blank? || params[:password].blank?
-      flash.now[alert] << 'ユーザーIDを入力してください' if params[:user_id].blank?
-      flash.now[alert] << 'パスワードを入力してください' if params[:password].blank?
+    @user = User.new(login_params)
+    if @user.invalid?
       render :new
     else
-      flash.now[alert] << 'ユーザーIDとパスワードが一致していません'
-      render :new
+      login_user = User.find_by_user_id(login_params[:user_id])
+      if login_user && login_user.authenticate(login_params[:password])
+        session[:user_id] = login_user.id
+        redirect_to photo_infos_path
+      else
+        @user.errors.add(:base, "ユーザーIDとパスワードが一致していません")
+        render :new
+      end
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to photo_info_path
+    redirect_to photo_infos_path
+  end
+
+  private   
+  def login_params 
+    params.require(:user).permit(:user_id, :password)
   end
 end
