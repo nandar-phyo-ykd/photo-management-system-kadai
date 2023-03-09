@@ -73,4 +73,10 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # OAuth configuration
+  config.x.oauth.client_id = Rails.application.credentials.dig(:oauth, :client_id)
+  config.x.oauth.client_secret = Rails.application.credentials.dig(:oauth, :client_secret)
+  config.x.oauth.idp_url = "http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/"
+  config.x.oauth.redirect_uri = "http://localhost:3000/oauth/callback"
 end

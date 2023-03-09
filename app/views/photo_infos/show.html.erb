@@ -1,13 +1,26 @@
 <p><%= link_to "ログアウト", logout_path, method: :delete %></p>
 <h1>写真一覧</h1>
 
+<% if session[:access_token] %>
+  <p>MyTweetAppと連携中</p>
+<% else %>
+  <p><a href="<%= @oauth_login_url %>" role="button">MyTweetAppと連携</a><p>
+<% end %>
+
 <p><%= link_to "写真アプロード画面へ", new_photo_infos_path %></p>
 
 <div>
   <% @photos_to_tweet.each do |photo| %>
-    <p style="text-align: center;float:left; margin:0 10px;">
+    <div style="text-align: center;float:left; margin:10px 10px;">
       <span><%= photo.title %></span><br/>
-      <%= image_tag "/user_upload_photos/#{photo.attachment}", {width:'150', height:'200', alt:'img'}%>
-    </p>
+      <%= image_tag "/user_upload_photos/#{photo.attachment}", {width:'150', height:'180', alt:'img'}%><br/>
+      <% if session[:access_token] %>
+        <%= form_with(url: twitter_path, method: :post, local: true) do |f| %>
+          <%= f.hidden_field :title, value: photo.title %>
+          <%= f.hidden_field :photo_file_name, value: photo.attachment %>
+          <%= f.submit "ツイートする" %>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
 </div>
