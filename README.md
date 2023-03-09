@@ -3,9 +3,9 @@
 The setups steps expect following tools installed on the system.
 
 - Github
-- Ruby [2.7.5](https://github.com/organization/project-name/blob/master/.ruby-version#L1)
-- Rails [6.1.7.2](https://github.com/organization/project-name/blob/master/Gemfile#L12)
-- OAuth [1.1.0]()
+- Ruby [2.7.5](https://www.ruby-lang.org/en/downloads/releases/)
+- Rails [6.1.7.2](https://rubygems.org/gems/rails/versions/6.1.7.2)
+- OAuth [1.1.0](https://rubygems.org/gems/oauth?locale=ja)
 
 ### 1. Check out the repository
 
