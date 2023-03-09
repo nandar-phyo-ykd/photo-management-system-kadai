@@ -1,4 +1,5 @@
 class PhotoInfosController < ApplicationController
+  include OAuthHelper
   before_action :login?, only: [:show, :new]
 
   def new   
@@ -33,7 +34,8 @@ class PhotoInfosController < ApplicationController
   end  
 
   def show
-    @photos_to_tweet = Photo.order(id: :desc)
+    @photos_to_tweet = Photo.where(user_id: current_user.id).order(id: :desc)  
+    @oauth_login_url = get_login_url
   end
 
   private   
