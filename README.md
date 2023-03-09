@@ -33,9 +33,10 @@ bundle exec rake db:seed
 mkdir public/user_upload_photos
 ```
 
-### 4.Compile the webpacker
+### 4.Install and compile the webpacker
 
 ```ruby
+bundle exec rake webpacker:install
 bundle exec rake webpacker:compile
 ```
 
